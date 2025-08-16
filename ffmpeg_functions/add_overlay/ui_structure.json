@@ -1,0 +1,441 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as Binary",
+            "name": "outputAsBinary",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to output the result as a binary file. Uncheck to specify a file path."
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "outputAsBinary": [
+                        true
+                    ]
+                }
+            },
+            "description": "The name to give the output binary property (e.g., 'data', 'myMediaFile')."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "outputAsBinary": [
+                        false
+                    ]
+                }
+            },
+            "placeholder": "/path/to/output.mp4",
+            "description": "The full file path to save the output media.",
+            "required": true
+        },
+        {
+            "displayName": "--- Layer 1 (Base) ---",
+            "name": "layer1Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer1IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer1BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer1IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer1FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer1IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer1TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer2TrimToThis": [true], "layer3TrimToThis": [true], "layer4TrimToThis": [true], "layer5TrimToThis": [true], "layer6TrimToThis": [true], "layer7TrimToThis": [true], "layer8TrimToThis": [true], "layer9TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer1Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 2 ---",
+            "name": "layer2Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer2IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer2BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer2IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer2FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer2IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer2TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer3TrimToThis": [true], "layer4TrimToThis": [true], "layer5TrimToThis": [true], "layer6TrimToThis": [true], "layer7TrimToThis": [true], "layer8TrimToThis": [true], "layer9TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer2Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer2TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 3 ---",
+            "name": "layer3Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer3IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer3BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer3IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer3FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer3IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer3TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer2TrimToThis": [true], "layer4TrimToThis": [true], "layer5TrimToThis": [true], "layer6TrimToThis": [true], "layer7TrimToThis": [true], "layer8TrimToThis": [true], "layer9TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer3Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer3TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 4 ---",
+            "name": "layer4Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer4IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer4BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer4IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer4FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer4IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer4TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer2TrimToThis": [true], "layer3TrimToThis": [true], "layer5TrimToThis": [true], "layer6TrimToThis": [true], "layer7TrimToThis": [true], "layer8TrimToThis": [true], "layer9TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer4Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer4TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 5 ---",
+            "name": "layer5Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer5IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer5BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer5IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer5FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer5IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer5TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer2TrimToThis": [true], "layer3TrimToThis": [true], "layer4TrimToThis": [true], "layer6TrimToThis": [true], "layer7TrimToThis": [true], "layer8TrimToThis": [true], "layer9TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer5Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer5TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 6 ---",
+            "name": "layer6Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer6IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer6BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer6IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer6FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer6IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer6TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer2TrimToThis": [true], "layer3TrimToThis": [true], "layer4TrimToThis": [true], "layer5TrimToThis": [true], "layer7TrimToThis": [true], "layer8TrimToThis": [true], "layer9TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer6Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer6TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 7 ---",
+            "name": "layer7Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer7IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer7BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer7IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer7FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer7IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer7TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer2TrimToThis": [true], "layer3TrimToThis": [true], "layer4TrimToThis": [true], "layer5TrimToThis": [true], "layer6TrimToThis": [true], "layer8TrimToThis": [true], "layer9TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer7Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer7TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 8 ---",
+            "name": "layer8Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer8IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer8BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer8IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer8FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer8IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer8TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer2TrimToThis": [true], "layer3TrimToThis": [true], "layer4TrimToThis": [true], "layer5TrimToThis": [true], "layer6TrimToThis": [true], "layer7TrimToThis": [true], "layer9TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer8Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer8TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 9 ---",
+            "name": "layer9Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer9IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer9BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer9IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer9FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer9IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer9TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer2TrimToThis": [true], "layer3TrimToThis": [true], "layer4TrimToThis": [true], "layer5TrimToThis": [true], "layer6TrimToThis": [true], "layer7TrimToThis": [true], "layer8TrimToThis": [true], "layer10TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer9Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer9TrimToThis": [true] } }
+        },
+        {
+            "displayName": "--- Layer 10 ---",
+            "name": "layer10Notice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use Binary Data",
+            "name": "layer10IsBinary",
+            "type": "boolean",
+            "default": false
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "layer10BinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "layer10IsBinary": [true] } }
+        },
+        {
+            "displayName": "File Path",
+            "name": "layer10FilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "layer10IsBinary": [false] } }
+        },
+        {
+            "displayName": "Trim to This",
+            "name": "layer10TrimToThis",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer1TrimToThis": [true], "layer2TrimToThis": [true], "layer3TrimToThis": [true], "layer4TrimToThis": [true], "layer5TrimToThis": [true], "layer6TrimToThis": [true], "layer7TrimToThis": [true], "layer8TrimToThis": [true], "layer9TrimToThis": [true] } }
+        },
+        {
+            "displayName": "Loop",
+            "name": "layer10Loop",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "hide": { "layer10TrimToThis": [true] } }
+        }
+    ]
+}

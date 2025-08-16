@@ -12,25 +12,20 @@ import {
 import { spawn } from 'child_process';
 import * as path from 'path';
 import { promises as fs } from 'fs';
+import * as os from 'os'; // Needed for temporary directory
 
 // --- HELPER FUNCTION ---
-// Moved readJson outside the class to make it a static helper.
-// This solves all the "duplicate function" and "this context" errors.
 async function readJson<T = any>(filePath: string): Promise<T> {
     try {
         const raw = await fs.readFile(filePath, 'utf-8');
         return JSON.parse(raw) as T;
     } catch (error) {
-        // We can't use the node's logger here, so console.error is appropriate.
         console.error(`Error reading JSON file at ${filePath}:`, error);
-        // Re-throw a more specific error for the node to catch.
         throw new Error(`Failed to read or parse JSON file: ${filePath}`);
     }
 }
 
-
 // --- INTERFACES ---
-// Define the structure of a function entry in the manifest
 interface IFFmpegFunction {
     name: string;
     value: string;
@@ -38,11 +33,9 @@ interface IFFmpegFunction {
     scriptFile: string;
 }
 
-// Define the structure of the manifest file
 interface IManifest {
     functions: IFFmpegFunction[];
 }
-
 
 // --- NODE IMPLEMENTATION ---
 export class FFmpegNode implements INodeType {
@@ -78,9 +71,6 @@ export class FFmpegNode implements INodeType {
         });
     }
 
-    /**
-     * Resolves the root directory of the n8n custom node package.
-     */
     private getRepoRoot(): string {
         return path.join(__dirname, '..', '..');
     }
@@ -99,14 +89,12 @@ export class FFmpegNode implements INodeType {
                         return [];
                     }
 
-                    // Call the static helper function directly
                     const manifest = await readJson<IManifest>(manifestPath);
 
                     if (!manifest.functions || manifest.functions.length === 0) {
                         throw new NodeOperationError(this.getNode(), 'No functions found in manifest.');
                     }
 
-                    // FIX: Added explicit type for 'func' to resolve implicit 'any' error.
                     return manifest.functions.map((func: IFFmpegFunction) => ({
                         name: func.name,
                         value: func.value,
@@ -122,10 +110,6 @@ export class FFmpegNode implements INodeType {
         },
     };
 
-    /**
-     * Loads UI definitions from all functions in the manifest and appends them
-     * as dynamic node properties with appropriate display conditions.
-     */
     private async loadAndAppendDynamicProperties(): Promise<void> {
         try {
             const repoRoot = this.getRepoRoot();
@@ -138,7 +122,6 @@ export class FFmpegNode implements INodeType {
                 return;
             }
 
-            // Call the static helper function directly
             const manifest = await readJson<IManifest>(manifestPath);
 
             if (!manifest.functions || !Array.isArray(manifest.functions)) {
@@ -156,7 +139,6 @@ export class FFmpegNode implements INodeType {
 
                 try {
                     await fs.access(uiStructurePath);
-                    // Call the static helper function directly
                     const uiConfig = await readJson<{ properties?: any[] }>(uiStructurePath);
                     const props = uiConfig?.properties || [];
 
@@ -183,7 +165,7 @@ export class FFmpegNode implements INodeType {
                 }
             }
         } catch (error) {
-            console.error('Failed to load dynamic properties:', (error as Error).message);
+            console.error('Failed to load dynamic properties:', error as Error);
         }
     }
 
@@ -191,132 +173,139 @@ export class FFmpegNode implements INodeType {
         const items = this.getInputData();
         const returnData: INodeExecutionData[] = [];
         const repoRoot = path.join(__dirname, '..', '..');
+        let tempFiles: string[] = [];
 
         for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
             try {
-                const selectedFunctionValue = this.getNodeParameter('selectedFunction', itemIndex) as string;
-
-                if (!selectedFunctionValue) {
-                    throw new NodeOperationError(this.getNode(), 'No function selected.');
-                }
+                const selectedFunctionValue = this.getNodeParameter('selectedFunction', itemIndex, '') as string;
+                if (!selectedFunctionValue) throw new NodeOperationError(this.getNode(), 'No function selected.');
 
                 const manifestPath = path.join(repoRoot, 'ffmpeg_node_manifest.json');
-
-                try {
-                    await fs.access(manifestPath);
-                } catch {
-                    throw new NodeOperationError(this.getNode(), `Manifest file not found: ${manifestPath}`);
-                }
-
-                // Call the static helper function directly
                 const manifest = await readJson<IManifest>(manifestPath);
-
-                // FIX: Added explicit type for 'f' to resolve implicit 'any' error.
                 const selectedFunction = manifest.functions.find((f: IFFmpegFunction) => f.value === selectedFunctionValue);
-                if (!selectedFunction) {
-                    throw new NodeOperationError(this.getNode(), `Function '${selectedFunctionValue}' not found in manifest.`);
-                }
+                if (!selectedFunction) throw new NodeOperationError(this.getNode(), `Function '${selectedFunctionValue}' not found.`);
 
                 const scriptPath = path.join(repoRoot, selectedFunction.scriptFile);
-
-                try {
-                    await fs.access(scriptPath);
-                } catch {
-                    throw new NodeOperationError(this.getNode(), `Script file not found: ${selectedFunction.scriptFile}`);
-                }
-
-                const args: string[] = [];
                 const uiStructurePath = path.join(repoRoot, selectedFunction.uiFile);
+                await fs.access(scriptPath);
 
-                try {
-                    await fs.access(uiStructurePath);
-                    // Call the static helper function directly
-                    const uiConfig = await readJson<{ properties?: any[] }>(uiStructurePath);
+                const parameters: IDataObject = {};
+                const uiConfig = await readJson<{ properties?: { name: string, type: string }[] }>(uiStructurePath);
 
-                    if (uiConfig.properties && Array.isArray(uiConfig.properties)) {
-                        for (const prop of uiConfig.properties) {
-                            if (!prop.name) continue;
-
-                            const value = this.getNodeParameter(prop.name, itemIndex, prop.default || '');
-
-                            if (value !== undefined && value !== null && value !== '') {
-                                args.push(`--${prop.name}`);
-                                args.push(String(value));
-                            }
+                if (uiConfig.properties && Array.isArray(uiConfig.properties)) {
+                    for (const prop of uiConfig.properties) {
+                        if (!prop.name) continue;
+                        try {
+                            parameters[prop.name] = this.getNodeParameter(prop.name, itemIndex);
+                        } catch (error) {
+                            continue;
                         }
                     }
-                } catch (error) {
-                    console.warn(`Failed to load UI config for ${selectedFunction.name}:`, (error as Error).message);
                 }
 
-                // Execute the Python script
-                const scriptResult = await new Promise<string>((resolve, reject) => {
-                    const pythonProcess = spawn('python3', [scriptPath, ...args], {
-                        stdio: ['pipe', 'pipe', 'pipe'],
-                    });
+                // **BINARY INPUT HANDLING**
+                // This logic is generic because it relies on a naming convention
+                // that all function UIs must follow for binary inputs.
+                const processedParameters = { ...parameters }; // Create a copy to modify
 
+                // Find all boolean toggles for binary data
+                const binaryToggleKeys = Object.keys(processedParameters).filter(k => k.endsWith('IsBinary'));
+
+                for (const toggleKey of binaryToggleKeys) {
+                    if (processedParameters[toggleKey] === true) {
+                        // If the toggle is on, find the corresponding property name field
+                        const prefix = toggleKey.replace('IsBinary', '');
+                        const binaryPropNameKey = `${prefix}BinaryPropertyName`;
+
+                        if (processedParameters[binaryPropNameKey]) {
+                            const binaryPropertyName = processedParameters[binaryPropNameKey] as string;
+                            
+                            // **THE FIX**
+                            // Correctly access the data for the current item from the 'items' array.
+                            const inputData = items[itemIndex];
+                            const binaryInfo = inputData.binary?.[binaryPropertyName];
+
+                            if (!binaryInfo) {
+                                throw new NodeOperationError(this.getNode(), `Binary property '${binaryPropertyName}' not found in input data.`);
+                            }
+                            
+                            const binaryBuffer = await this.helpers.getBinaryDataBuffer(itemIndex, binaryPropertyName);
+                            const fileName = binaryInfo.fileName ?? `${binaryPropertyName}.bin`;
+
+                            const tempPath = path.join(os.tmpdir(), `n8n-ffmpeg-bin-${Date.now()}-${fileName}`);
+                            await fs.writeFile(tempPath, binaryBuffer);
+                            tempFiles.push(tempPath);
+
+                            // Replace the property name (e.g., 'data') with the actual temp file path.
+                            // The Python script will now receive the path it needs.
+                            processedParameters[binaryPropNameKey] = tempPath;
+                        }
+                    }
+                }
+
+
+                const paramsPath = path.join(os.tmpdir(), `n8n-ffmpeg-params-${Date.now()}-${itemIndex}.json`);
+                await fs.writeFile(paramsPath, JSON.stringify(processedParameters, null, 2));
+                tempFiles.push(paramsPath);
+
+                const scriptResult = await new Promise<string>((resolve, reject) => {
+                    const pythonProcess = spawn('python', [scriptPath, paramsPath]);
                     let stdout = '';
                     let stderr = '';
-
-                    pythonProcess.stdout.on('data', (data: Buffer) => {
-                        stdout += data.toString();
-                    });
-
-                    pythonProcess.stderr.on('data', (data: Buffer) => {
-                        stderr += data.toString();
-                    });
-
-                    pythonProcess.on('close', (code: number | null) => {
-                        if (code !== 0) {
-                            const errorMessage = stderr || `Script exited with code ${code}`;
-                            return reject(new NodeOperationError(this.getNode(), `Script failed: ${errorMessage}`));
-                        }
+                    pythonProcess.stdout.on('data', (data) => (stdout += data.toString()));
+                    pythonProcess.stderr.on('data', (data) => (stderr += data.toString()));
+                    pythonProcess.on('close', (code) => {
+                        if (code !== 0) return reject(new NodeOperationError(this.getNode(), `Script failed: ${stderr || `Exited with code ${code}`}`));
                         resolve(stdout.trim());
                     });
-
-                    pythonProcess.on('error', (err: Error) => {
-                        reject(new NodeOperationError(this.getNode(), `Failed to start script: ${err.message}`));
-                    });
-
-                    const timeout = setTimeout(() => {
-                        pythonProcess.kill();
-                        reject(new NodeOperationError(this.getNode(), 'Script execution timed out'));
-                    }, 30000);
-
-                    pythonProcess.on('close', () => {
-                        clearTimeout(timeout);
-                    });
+                    pythonProcess.on('error', (err) => reject(new NodeOperationError(this.getNode(), `Failed to start script: ${err.message}`)));
                 });
 
                 let jsonResult: IDataObject;
                 try {
                     jsonResult = JSON.parse(scriptResult);
                 } catch {
-                    jsonResult = {
-                        output: scriptResult,
-                        parseError: true
-                    };
+                    jsonResult = { output: scriptResult, parseError: true };
                 }
 
-                returnData.push({
-                    json: jsonResult,
-                    pairedItem: { item: itemIndex },
-                });
+                // **BINARY OUTPUT HANDLING**
+                if (jsonResult.binary_data && jsonResult.file_name) {
+                    const binaryBuffer = Buffer.from(jsonResult.binary_data as string, 'base64');
+                    const binaryData = await this.helpers.prepareBinaryData(
+                        binaryBuffer,
+                        jsonResult.file_name as string,
+                    );
+                    
+                    const executionData: INodeExecutionData = {
+                        json: {}, // Can add other non-binary results here if needed
+                        binary: { data: binaryData },
+                        pairedItem: { item: itemIndex },
+                    };
+                    returnData.push(executionData);
+
+                } else {
+                    // Standard non-binary output
+                    returnData.push({ json: jsonResult, pairedItem: { item: itemIndex } });
+                }
+
 
             } catch (error) {
                 if (this.continueOnFail()) {
-                    returnData.push({
-                        json: {
-                            error: (error as Error).message
-                        },
-                        pairedItem: { item: itemIndex }
-                    });
+                    returnData.push({ json: { error: (error as Error).message }, pairedItem: { item: itemIndex } });
                     continue;
                 }
                 throw error;
+            } finally {
+                for (const filePath of tempFiles) {
+                    try {
+                        await fs.unlink(filePath);
+                    } catch (e) {
+                        console.error(`Could not clean up temp file ${filePath}:`, e);
+                    }
+                }
+                tempFiles = [];
             }
         }
-
-        return [returnData];
+        return this.prepareOutputData(returnData);
     }
 }
