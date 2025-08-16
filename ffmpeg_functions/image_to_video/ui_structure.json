@@ -1,0 +1,95 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        true
+                    ]
+                }
+            },
+            "placeholder": "/path/to/output.mp4",
+            "description": "The full file path to save the output video.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "--- Input Image ---",
+            "name": "inputImageNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Use a file path for the input image. Uncheck to use binary data from a previous node."
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        true
+                    ]
+                }
+            },
+            "description": "The full file path to the input image file."
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name of the binary property containing the input image."
+        },
+        {
+            "displayName": "--- Video Settings ---",
+            "name": "videoSettingsNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Duration (Seconds)",
+            "name": "duration",
+            "type": "number",
+            "default": 10,
+            "description": "The desired length of the output video in seconds."
+        }
+    ]
+}

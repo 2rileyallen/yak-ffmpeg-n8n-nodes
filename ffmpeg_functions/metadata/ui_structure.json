@@ -1,0 +1,158 @@
+{
+    "properties": [
+        {
+            "displayName": "Mode",
+            "name": "mode",
+            "type": "options",
+            "options": [
+                {
+                    "name": "Show Metadata",
+                    "value": "show"
+                },
+                {
+                    "name": "Edit Metadata",
+                    "value": "edit"
+                }
+            ],
+            "default": "show",
+            "description": "Choose whether to view existing metadata or edit it."
+        },
+        {
+            "displayName": "--- Input Media ---",
+            "name": "inputMediaNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Use a file path for the input media. Uncheck to use binary data from a previous node."
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        true
+                    ]
+                }
+            },
+            "description": "The full file path to the input media file."
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name of the binary property containing the input media."
+        },
+        {
+            "displayName": "Media Type",
+            "name": "mediaType",
+            "type": "options",
+            "displayOptions": {
+                "show": {
+                    "mode": [
+                        "edit"
+                    ]
+                }
+            },
+            "options": [
+                {
+                    "name": "Audio",
+                    "value": "audio"
+                },
+                {
+                    "name": "Video",
+                    "value": "video"
+                },
+                {
+                    "name": "Image",
+                    "value": "image"
+                }
+            ],
+            "default": "video",
+            "description": "Select the type of media to ensure the correct metadata fields are shown."
+        },
+        {
+            "displayName": "--- Audio Metadata ---",
+            "name": "audioMetadataNotice",
+            "type": "notice",
+            "default": "",
+            "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["audio"] } }
+        },
+        { "displayName": "Title", "name": "audioTitle", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["audio"] } } },
+        { "displayName": "Artist", "name": "audioArtist", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["audio"] } } },
+        { "displayName": "Album", "name": "audioAlbum", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["audio"] } } },
+        { "displayName": "Genre", "name": "audioGenre", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["audio"] } } },
+        { "displayName": "Track Number", "name": "audioTrack", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["audio"] } } },
+        {
+            "displayName": "--- Video Metadata ---",
+            "name": "videoMetadataNotice",
+            "type": "notice",
+            "default": "",
+            "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["video"] } }
+        },
+        { "displayName": "Title", "name": "videoTitle", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["video"] } } },
+        { "displayName": "Author", "name": "videoAuthor", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["video"] } } },
+        { "displayName": "Copyright", "name": "videoCopyright", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["video"] } } },
+        { "displayName": "Comment", "name": "videoComment", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["video"] } } },
+        { "displayName": "Year", "name": "videoYear", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["video"] } } },
+        {
+            "displayName": "--- Image Metadata ---",
+            "name": "imageMetadataNotice",
+            "type": "notice",
+            "default": "",
+            "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["image"] } }
+        },
+        { "displayName": "Description", "name": "imageDescription", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["image"] } } },
+        { "displayName": "Author", "name": "imageAuthor", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["image"] } } },
+        { "displayName": "Copyright", "name": "imageCopyright", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["image"] } } },
+        { "displayName": "Comment", "name": "imageComment", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["image"] } } },
+        { "displayName": "Title", "name": "imageTitle", "type": "string", "default": "", "displayOptions": { "show": { "mode": ["edit"], "mediaType": ["image"] } } },
+        {
+            "displayName": "--- Output Settings ---",
+            "name": "outputSettingsNotice",
+            "type": "notice",
+            "default": "",
+            "displayOptions": { "show": { "mode": ["edit"] } }
+        },
+        {
+            "displayName": "Replace Original File",
+            "name": "replaceOriginal",
+            "type": "boolean",
+            "default": false,
+            "displayOptions": { "show": { "mode": ["edit"] } },
+            "description": "If enabled, the original input file will be replaced. This is a destructive action."
+        },
+        {
+            "displayName": "⚠️ WARNING: Potential Workflow Issues",
+            "name": "replaceWarning",
+            "type": "notice",
+            "default": "Enabling 'Replace Original File' can cause errors if the input file is used elsewhere in your workflow. It is safest to use this as the final step for this file.",
+            "displayOptions": { "show": { "mode": ["edit"], "replaceOriginal": [true] } }
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "mode": ["edit"], "replaceOriginal": [false] } },
+            "placeholder": "/path/to/new_file.mp4",
+            "description": "The full file path to save the new media file with edited metadata.",
+            "required": true
+        }
+    ]
+}

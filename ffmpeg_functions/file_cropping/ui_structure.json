@@ -1,0 +1,116 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        true
+                    ]
+                }
+            },
+            "placeholder": "/path/to/output.mp4",
+            "description": "The full file path to save the cropped media.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "--- Input Media ---",
+            "name": "inputMediaNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Use a file path for the input media. Uncheck to use binary data from a previous node."
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        true
+                    ]
+                }
+            },
+            "description": "The full file path to the input media file."
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name of the binary property containing the input media."
+        },
+        {
+            "displayName": "--- Crop Settings ---",
+            "name": "cropSettingsNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Crop Width",
+            "name": "cropWidth",
+            "type": "number",
+            "default": 1920,
+            "description": "The width of the final cropped area in pixels."
+        },
+        {
+            "displayName": "Crop Height",
+            "name": "cropHeight",
+            "type": "number",
+            "default": 1080,
+            "description": "The height of the final cropped area in pixels."
+        },
+        {
+            "displayName": "X Offset",
+            "name": "xOffset",
+            "type": "number",
+            "default": 0,
+            "description": "The distance from the left edge to start the crop."
+        },
+        {
+            "displayName": "Y Offset",
+            "name": "yOffset",
+            "type": "number",
+            "default": 0,
+            "description": "The distance from the top edge to start the crop."
+        }
+    ]
+}

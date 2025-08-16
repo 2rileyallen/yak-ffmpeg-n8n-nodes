@@ -1,0 +1,184 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "outputAsFilePath": [true] } },
+            "placeholder": "/path/to/output.mp4",
+            "description": "The full file path to save the normalized media.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "outputAsFilePath": [false] } },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "--- Input Media ---",
+            "name": "inputMediaNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "inputUseFilePath": [true] } }
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "inputUseFilePath": [false] } }
+        },
+        {
+            "displayName": "Media Type",
+            "name": "mediaType",
+            "type": "options",
+            "options": [
+                { "name": "Video", "value": "video" },
+                { "name": "Audio", "value": "audio" },
+                { "name": "Image", "value": "image" }
+            ],
+            "default": "video",
+            "description": "Select the type of media you are normalizing."
+        },
+        {
+            "displayName": "--- Video Normalization ---",
+            "name": "videoNormNotice",
+            "type": "notice",
+            "default": "",
+            "displayOptions": { "show": { "mediaType": ["video"] } }
+        },
+        {
+            "displayName": "Resolution",
+            "name": "videoResolution",
+            "type": "options",
+            "displayOptions": { "show": { "mediaType": ["video"] } },
+            "options": [
+                { "name": "Keep Original", "value": "original" },
+                { "name": "3840x2160 (4K)", "value": "3840x2160" },
+                { "name": "1920x1080 (1080p)", "value": "1920x1080" },
+                { "name": "1280x720 (720p)", "value": "1280x720" },
+                { "name": "720x480 (480p)", "value": "720x480" }
+            ],
+            "default": "original"
+        },
+        {
+            "displayName": "Aspect Ratio",
+            "name": "videoAspectRatio",
+            "type": "options",
+            "displayOptions": { "show": { "mediaType": ["video"] } },
+            "options": [
+                { "name": "Keep Original", "value": "original" },
+                { "name": "16:9 (Widescreen)", "value": "16:9" },
+                { "name": "9:16 (Vertical)", "value": "9:16" },
+                { "name": "1:1 (Square)", "value": "1:1" }
+            ],
+            "default": "original"
+        },
+        {
+            "displayName": "Frame Rate",
+            "name": "videoFrameRate",
+            "type": "options",
+            "displayOptions": { "show": { "mediaType": ["video"] } },
+            "options": [
+                { "name": "Keep Original", "value": "original" },
+                { "name": "16 fps", "value": "16" },
+                { "name": "24 fps (Cinematic)", "value": "24" },
+                { "name": "30 fps (Standard)", "value": "30" }
+            ],
+            "default": "original"
+        },
+        {
+            "displayName": "Output Format",
+            "name": "videoFormat",
+            "type": "options",
+            "displayOptions": { "show": { "mediaType": ["video"] } },
+            "options": [
+                { "name": "MP4", "value": "mp4" },
+                { "name": "MOV", "value": "mov" }
+            ],
+            "default": "mp4"
+        },
+        {
+            "displayName": "--- Audio Normalization ---",
+            "name": "audioNormNotice",
+            "type": "notice",
+            "default": "",
+            "displayOptions": { "show": { "mediaType": ["audio"] } }
+        },
+        {
+            "displayName": "Loudness Target (LUFS)",
+            "name": "audioLoudness",
+            "type": "options",
+            "displayOptions": { "show": { "mediaType": ["audio"] } },
+            "options": [
+                { "name": "-14 LUFS (Web/YouTube/Spotify)", "value": "-14" },
+                { "name": "-16 LUFS (Apple Music/Podcasts)", "value": "-16" },
+                { "name": "-23 LUFS (Broadcast TV)", "value": "-23" }
+            ],
+            "default": "-14"
+        },
+        {
+            "displayName": "Output Format",
+            "name": "audioFormat",
+            "type": "options",
+            "displayOptions": { "show": { "mediaType": ["audio"] } },
+            "options": [
+                { "name": "MP3", "value": "mp3" },
+                { "name": "M4A (AAC)", "value": "m4a" },
+                { "name": "WAV", "value": "wav" }
+            ],
+            "default": "mp3"
+        },
+        {
+            "displayName": "--- Image Normalization ---",
+            "name": "imageNormNotice",
+            "type": "notice",
+            "default": "",
+            "displayOptions": { "show": { "mediaType": ["image"] } }
+        },
+        {
+            "displayName": "Output Format",
+            "name": "imageFormat",
+            "type": "options",
+            "displayOptions": { "show": { "mediaType": ["image"] } },
+            "options": [
+                { "name": "PNG", "value": "png" },
+                { "name": "JPG", "value": "jpg" },
+                { "name": "WEBP", "value": "webp" }
+            ],
+            "default": "png"
+        },
+        {
+            "displayName": "Quality",
+            "name": "imageQuality",
+            "type": "number",
+            "typeOptions": { "minValue": 1, "maxValue": 100 },
+            "default": 92,
+            "displayOptions": { "show": { "mediaType": ["image"], "imageFormat": ["jpg", "webp"] } },
+            "description": "Compression quality for JPG or WEBP formats (1-100)."
+        }
+    ]
+}

@@ -1,0 +1,109 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data. Note: Binary output is disabled if 'Keep Trimmed Segments' is enabled."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        true
+                    ]
+                }
+            },
+            "placeholder": "/path/to/output.mp4",
+            "description": "The full file path to save the primary trimmed media.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "--- Input Media ---",
+            "name": "inputMediaNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Use a file path for the input media. Uncheck to use binary data from a previous node."
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        true
+                    ]
+                }
+            },
+            "description": "The full file path to the input media file."
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name of the binary property containing the input media."
+        },
+        {
+            "displayName": "--- Trim Settings ---",
+            "name": "trimSettingsNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Start Time (Seconds)",
+            "name": "startTime",
+            "type": "number",
+            "default": 0,
+            "description": "The time to start the trim from the beginning of the media."
+        },
+        {
+            "displayName": "End Time (Seconds)",
+            "name": "endTime",
+            "type": "number",
+            "default": 10,
+            "description": "The time to end the trim. This defines the end point of the main segment."
+        },
+        {
+            "displayName": "Keep Trimmed Segments",
+            "name": "keepTrimmedSegments",
+            "type": "boolean",
+            "default": false,
+            "description": "If enabled, the parts of the media before the start time and after the end time will also be saved as separate files."
+        }
+    ]
+}

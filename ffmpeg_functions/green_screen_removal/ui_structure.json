@@ -1,0 +1,112 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        true
+                    ]
+                }
+            },
+            "placeholder": "/path/to/output.mov",
+            "description": "The full file path to save the output. Use a format that supports transparency like .mov or .webm.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "--- Input Media ---",
+            "name": "inputMediaNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Use a file path for the input media. Uncheck to use binary data from a previous node."
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        true
+                    ]
+                }
+            },
+            "description": "The full file path to the input video or image file."
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name of the binary property containing the input media."
+        },
+        {
+            "displayName": "--- Chroma Key Settings ---",
+            "name": "chromaKeySettingsNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Similarity",
+            "name": "similarity",
+            "type": "number",
+            "typeOptions": {
+                "minValue": 0.01,
+                "maxValue": 1.0,
+                "numberStepSize": 0.01
+            },
+            "default": 0.1,
+            "description": "How similar a color must be to the key color to be replaced. A higher value is more aggressive."
+        },
+        {
+            "displayName": "Blend",
+            "name": "blend",
+            "type": "number",
+            "typeOptions": {
+                "minValue": 0.0,
+                "maxValue": 1.0,
+                "numberStepSize": 0.01
+            },
+            "default": 0.1,
+            "description": "The softness of the transition between the foreground and the transparent background."
+        }
+    ]
+}

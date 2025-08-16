@@ -1,0 +1,135 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "outputAsFilePath": [true] } },
+            "placeholder": "/path/to/output.mp4",
+            "description": "The full file path to save the resized media.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "outputAsFilePath": [false] } },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "--- Input Media ---",
+            "name": "inputMediaNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "inputUseFilePath": [true] } }
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "inputUseFilePath": [false] } }
+        },
+        {
+            "displayName": "--- Resize Settings ---",
+            "name": "resizeSettingsNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Output Width",
+            "name": "outputWidth",
+            "type": "number",
+            "default": 1920,
+            "description": "The final width of the media in pixels."
+        },
+        {
+            "displayName": "Output Height",
+            "name": "outputHeight",
+            "type": "number",
+            "default": 1080,
+            "description": "The final height of the media in pixels."
+        },
+        {
+            "displayName": "Resize Method",
+            "name": "resizeMethod",
+            "type": "options",
+            "options": [
+                { "name": "Stretch to Fit", "value": "stretch" },
+                { "name": "Crop to Fill", "value": "crop" },
+                { "name": "Pad to Fit (Letterbox)", "value": "pad" }
+            ],
+            "default": "stretch",
+            "description": "The method used to fit the source into the new dimensions."
+        },
+        {
+            "displayName": "Crop Anchor",
+            "name": "cropAnchor",
+            "type": "options",
+            "displayOptions": { "show": { "resizeMethod": ["crop"] } },
+            "options": [
+                { "name": "Center", "value": "center" },
+                { "name": "Top", "value": "top" },
+                { "name": "Bottom", "value": "bottom" },
+                { "name": "Left", "value": "left" },
+                { "name": "Right", "value": "right" },
+                { "name": "Top Left", "value": "topLeft" },
+                { "name": "Top Right", "value": "topRight" },
+                { "name": "Bottom Left", "value": "bottomLeft" },
+                { "name": "Bottom Right", "value": "bottomRight" }
+            ],
+            "default": "center",
+            "description": "The part of the original media to keep when cropping."
+        },
+        {
+            "displayName": "Placement Anchor",
+            "name": "placementAnchor",
+            "type": "options",
+            "displayOptions": { "show": { "resizeMethod": ["pad"] } },
+            "options": [
+                { "name": "Center", "value": "center" },
+                { "name": "Top Left", "value": "topLeft" },
+                { "name": "Top Right", "value": "topRight" },
+                { "name": "Bottom Left", "value": "bottomLeft" },
+                { "name": "Bottom Right", "value": "bottomRight" }
+            ],
+            "default": "center",
+            "description": "Where to place the media on the new canvas."
+        },
+        {
+            "displayName": "Pad Color",
+            "name": "padColor",
+            "type": "options",
+            "displayOptions": { "show": { "resizeMethod": ["pad"] } },
+            "options": [
+                { "name": "Black", "value": "black" },
+                { "name": "White", "value": "white" },
+                { "name": "Green", "value": "green" },
+                { "name": "Transparent", "value": "transparent" }
+            ],
+            "default": "black",
+            "description": "The color of the padding. 'Transparent' requires an output format that supports it (e.g., .mov, .png)."
+        }
+    ]
+}

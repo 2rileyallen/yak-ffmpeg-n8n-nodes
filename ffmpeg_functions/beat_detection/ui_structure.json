@@ -1,0 +1,74 @@
+{
+    "properties": [
+        {
+            "displayName": "--- Input Audio ---",
+            "name": "inputAudioNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Use a file path for the input audio. Uncheck to use binary data from a previous node."
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        true
+                    ]
+                }
+            },
+            "description": "The full file path to the input audio file."
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name of the binary property containing the input audio."
+        },
+        {
+            "displayName": "--- Analysis Settings ---",
+            "name": "analysisSettingsNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Beats per Second",
+            "name": "beatsPerSecond",
+            "type": "number",
+            "typeOptions": {
+                "minValue": 1,
+                "maxValue": 5
+            },
+            "default": 2,
+            "description": "The number of times per second to check for a beat. Higher values are more granular."
+        },
+        {
+            "displayName": "Smoothing Factor",
+            "name": "smoothingFactor",
+            "type": "number",
+            "typeOptions": {
+                "minValue": 0.0,
+                "maxValue": 1.0,
+                "numberStepSize": 0.1
+            },
+            "default": 0.5,
+            "description": "A value from 0 (no smoothing) to 1 (max smoothing) to average out beat strength and prevent sudden jumps."
+        }
+    ]
+}

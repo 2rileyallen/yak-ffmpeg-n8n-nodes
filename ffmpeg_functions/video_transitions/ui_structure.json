@@ -1,0 +1,92 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "outputAsFilePath": [true] } },
+            "placeholder": "/path/to/output.mp4",
+            "description": "The full file path to save the output video.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "outputAsFilePath": [false] } },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "--- Input Video ---",
+            "name": "inputVideoNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": { "show": { "inputUseFilePath": [true] } }
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": { "show": { "inputUseFilePath": [false] } }
+        },
+        {
+            "displayName": "--- Transition Settings ---",
+            "name": "transitionSettingsNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Transition Type",
+            "name": "transitionType",
+            "type": "options",
+            "options": [
+                { "name": "Fade In", "value": "fadeIn" },
+                { "name": "Fade Out", "value": "fadeOut" },
+                { "name": "Fade In & Out", "value": "fadeInOut" }
+            ],
+            "default": "fadeIn",
+            "description": "The type of fade transition to apply."
+        },
+        {
+            "displayName": "Fade Color",
+            "name": "fadeColor",
+            "type": "options",
+            "options": [
+                { "name": "Black", "value": "black" },
+                { "name": "White", "value": "white" },
+                { "name": "Transparent", "value": "transparent" }
+            ],
+            "default": "black",
+            "description": "The color to fade from or to. 'Transparent' requires an output format that supports it (e.g., .mov)."
+        },
+        {
+            "displayName": "Fade Duration (Seconds)",
+            "name": "fadeDuration",
+            "type": "number",
+            "default": 1,
+            "description": "The duration of the fade in seconds. For 'Fade In & Out', this duration is applied to both the start and the end."
+        }
+    ]
+}

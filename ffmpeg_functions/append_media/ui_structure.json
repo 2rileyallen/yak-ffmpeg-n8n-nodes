@@ -1,0 +1,59 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        true
+                    ]
+                }
+            },
+            "placeholder": "/path/to/output.mp4",
+            "description": "The full file path to save the output media.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "Media Files (JSON Array)",
+            "name": "mediaFilesJson",
+            "type": "string",
+            "typeOptions": {
+                "rows": 6
+            },
+            "default": "",
+            "placeholder": "[\n  {\n    \"path\": \"/path/to/video1.mp4\",\n    \"overlap\": 2\n  },\n  {\n    \"path\": \"/path/to/video2.mp4\",\n    \"overlap\": 0\n  }\n]",
+            "description": "A JSON array of media files to append. Each object must have a 'path' and can optionally have an 'overlap' in seconds.",
+            "required": true
+        },
+        {
+            "displayName": "Note",
+            "name": "jsonFormatNotice",
+            "type": "notice",
+            "default": "Each object in the array must contain a `\"path\"` key with the full file path. You can optionally include an `\"overlap\"` key (in seconds) to define the crossfade duration to the *next* clip. The overlap on the final clip is ignored."
+        }
+    ]
+}

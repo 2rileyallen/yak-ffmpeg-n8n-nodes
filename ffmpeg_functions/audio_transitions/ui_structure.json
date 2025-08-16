@@ -1,0 +1,122 @@
+{
+    "properties": [
+        {
+            "displayName": "Output as File Path",
+            "name": "outputAsFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to save the output to a specified file path. Uncheck to output as binary data."
+        },
+        {
+            "displayName": "Output File Path",
+            "name": "outputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        true
+                    ]
+                }
+            },
+            "placeholder": "/path/to/output.mp3",
+            "description": "The full file path to save the output audio.",
+            "required": true
+        },
+        {
+            "displayName": "Output Binary Property Name",
+            "name": "outputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "outputAsFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name to give the output binary property."
+        },
+        {
+            "displayName": "--- Input Audio ---",
+            "name": "inputAudioNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Use File Path",
+            "name": "inputUseFilePath",
+            "type": "boolean",
+            "default": true,
+            "description": "Use a file path for the input audio. Uncheck to use binary data from a previous node."
+        },
+        {
+            "displayName": "File Path",
+            "name": "inputFilePath",
+            "type": "string",
+            "default": "",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        true
+                    ]
+                }
+            },
+            "description": "The full file path to the input audio file."
+        },
+        {
+            "displayName": "Binary Property Name",
+            "name": "inputBinaryPropertyName",
+            "type": "string",
+            "default": "data",
+            "displayOptions": {
+                "show": {
+                    "inputUseFilePath": [
+                        false
+                    ]
+                }
+            },
+            "description": "The name of the binary property containing the input audio."
+        },
+        {
+            "displayName": "--- Transition Settings ---",
+            "name": "transitionSettingsNotice",
+            "type": "notice",
+            "default": ""
+        },
+        {
+            "displayName": "Transition Type",
+            "name": "transitionType",
+            "type": "options",
+            "options": [
+                {
+                    "name": "Fade In",
+                    "value": "fadeIn"
+                },
+                {
+                    "name": "Fade Out",
+                    "value": "fadeOut"
+                },
+                {
+                    "name": "Fade In & Out",
+                    "value": "fadeInOut"
+                }
+            ],
+            "default": "fadeIn",
+            "description": "The type of fade transition to apply."
+        },
+        {
+            "displayName": "Note on Expressions",
+            "name": "expressionNotice",
+            "type": "notice",
+            "default": "For expressions, use the exact values: `fadeIn`, `fadeOut`, or `fadeInOut`."
+        },
+        {
+            "displayName": "Fade Duration (Seconds)",
+            "name": "fadeDuration",
+            "type": "number",
+            "default": 5,
+            "description": "The duration of the fade in seconds. For 'Fade In & Out', this duration is applied to both the start and the end."
+        }
+    ]
+}
