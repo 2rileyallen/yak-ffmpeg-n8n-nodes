@@ -1,0 +1,76 @@
+{
+  "functions": [
+    {
+      "name": "Beat Detection",
+      "value": "beatDetection",
+      "uiFile": "ffmpeg_functions/beat_detection/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/beat_detection/logic.py"
+    },
+    {
+      "name": "Append Media",
+      "value": "appendMedia",
+      "uiFile": "ffmpeg_functions/append_media/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/append_media/logic.py"
+    },
+    {
+      "name": "Green Screen Removal",
+      "value": "greenScreenRemoval",
+      "uiFile": "ffmpeg_functions/green_screen_removal/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/green_screen_removal/logic.py"
+    },
+    {
+      "name": "Add Overlay",
+      "value": "addOverlay",
+      "uiFile": "ffmpeg_functions/add_overlay/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/add_overlay/logic.py"
+    },
+    {
+      "name": "Image to Video",
+      "value": "imageToVideo",
+      "uiFile": "ffmpeg_functions/image_to_video/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/image_to_video/logic.py"
+    },
+    {
+      "name": "Metadata",
+      "value": "metadata",
+      "uiFile": "ffmpeg_functions/metadata/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/metadata/logic.py"
+    },
+    {
+      "name": "Normalize Files",
+      "value": "normalizeFiles",
+      "uiFile": "ffmpeg_functions/normalize_files/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/normalize_files/logic.py"
+    },
+    {
+      "name": "Resize Files",
+      "value": "resizeFiles",
+      "uiFile": "ffmpeg_functions/resize_files/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/resize_files/logic.py"
+    },
+    {
+      "name": "Audio Transitions",
+      "value": "audioTransitions",
+      "uiFile": "ffmpeg_functions/audio_transitions/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/audio_transitions/logic.py"
+    },
+    {
+      "name": "Video Transitions",
+      "value": "videoTransitions",
+      "uiFile": "ffmpeg_functions/video_transitions/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/video_transitions/logic.py"
+    },
+    {
+      "name": "File Trimming",
+      "value": "fileTrimming",
+      "uiFile": "ffmpeg_functions/file_trimming/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/file_trimming/logic.py"
+    },
+    {
+      "name": "File Cropping",
+      "value": "fileCropping",
+      "uiFile": "ffmpeg_functions/file_cropping/ui_structure.json",
+      "scriptFile": "ffmpeg_functions/file_cropping/logic.py"
+    }
+  ]
+}
